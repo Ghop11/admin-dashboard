@@ -6,9 +6,9 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" v-on:click="view('dashboard')">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <v-icon color="white">mdi-account-circle</v-icon>
         </div>
         <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
       </a>
@@ -19,7 +19,7 @@
       <!-- Nav Item - Dashboard -->
       <li id="dashboard" class="nav-item active">
         <a class="nav-link " v-on:click="view('dashboard')">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <v-icon>mdi-gauge</v-icon>
           <span>Dashboard</span></a>
       </li>
 
@@ -31,26 +31,39 @@
         Sub Heading
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li id="pages" class="nav-item">
-        <a class="nav-link" v-on:click="view('pages')">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Pages</span></a>
+      <!-- Nav Item - Add Reports -->
+      <li id="addReports" class="nav-item">
+        <a class="nav-link" v-on:click="view('addReports')">
+          <v-icon>mdi-database-plus</v-icon>
+          <span>Add Report</span></a>
+      </li>
 
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li id="updateReports" class="nav-item">
+        <a class="nav-link" v-on:click="view('updateReports')">
+          <v-icon>mdi-database-edit</v-icon>
+          <span>Update Report</span></a>
       </li>
 
       <!-- Nav Item - Charts -->
       <li id="charts" class="nav-item ">
         <a class="nav-link" v-on:click="view('charts')">
-          <i class="fas fa-fw fa-chart-area"></i>
+          <v-icon>mdi-chart-bar</v-icon>
           <span>Charts</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li id="settings"  class="nav-item">
         <a class="nav-link" v-on:click="view('settings')">
-          <i class="fas fa-fw fa-table"></i>
+          <v-icon>mdi-settings</v-icon>
           <span>Settings</span></a>
+      </li>
+
+      <!-- Nav Item - Logout -->
+      <li id="logout"  class="nav-item">
+        <a class="nav-link" v-on:click="view('logout')">
+          <v-icon>mdi-logout</v-icon>
+          <span>Logout</span></a>
       </li>
 
       <!-- Divider -->
@@ -58,7 +71,8 @@
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <v-icon color="white">mdi-arrow-left-circle-outline</v-icon>
+<!--        <button class="rounded-circle border-0" id="sidebarToggle"></button>-->
       </div>
 
     </ul>
@@ -75,7 +89,8 @@
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
+            <v-icon color="white">mdi-menu</v-icon>
+<!--            <i class="fa fa-bars"></i>-->
           </button>
 
           <!-- Topbar Search -->
@@ -115,7 +130,8 @@
         <div class="container-fluid">
           <!-- Page Content -->
           <Dashboard v-if="dashboard"></Dashboard>
-          <Pages v-if="pages"></Pages>
+          <AddReports v-if="addReports"></AddReports>
+          <UpdateReports v-if="updateReports"></UpdateReports>
           <Charts v-if="charts"></Charts>
           <Settings v-if="settings"></Settings>
           <!-- Page Content -->
@@ -145,7 +161,8 @@
 <script>
     import Charts from "../components/Charts";
     import Dashboard from "../components/Dashboard";
-    import Pages from "../components/Pages";
+    import AddReports from "../components/AddReports.vue";
+    import UpdateReports from '../components/UpdateReports.vue';
     import Settings from "../components/Settings";
 
     export default {
@@ -153,16 +170,19 @@
         components: {
             Charts,
             Dashboard,
-            Pages,
+            AddReports,
+            UpdateReports,
             Settings,
         },
         data() {
             return {
-                views: ['charts', 'dashboard', 'pages', 'settings'],
+                views: ['charts', 'dashboard', 'addReports', 'settings', 'updateReports'],
                 charts: false,
                 dashboard: true,
-                pages: false,
-                settings: false
+                addReports: false,
+                settings: false,
+                logout: false,
+                updateReports: false,
             }
         },
         methods: {

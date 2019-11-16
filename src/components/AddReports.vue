@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Page Heading -->
-    <h1>Header Pages</h1>
+    <h1>Header Add Reports</h1>
     <p>Description</p>
     <!-- Page Heading -->
   </div>
