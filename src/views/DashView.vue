@@ -70,10 +70,10 @@
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <v-icon color="white">mdi-arrow-left-circle-outline</v-icon>
-<!--        <button class="rounded-circle border-0" id="sidebarToggle"></button>-->
-      </div>
+<!--      <div class="text-center d-none d-md-inline">-->
+<!--        <v-icon v-on:click="sidebar()" color="white">mdi-arrow-left-circle-outline</v-icon>-->
+<!--&lt;!&ndash;        <button class="rounded-circle border-0" id="sidebarToggle"></button>&ndash;&gt;-->
+<!--      </div>-->
 
     </ul>
     <!-- End of Sidebar -->
@@ -164,6 +164,7 @@
     import AddReports from "../components/AddReports.vue";
     import UpdateReports from '../components/UpdateReports.vue';
     import Settings from "../components/Settings";
+    import $ from 'jquery';
 
     export default {
         name: "DashView.vue",
@@ -191,11 +192,19 @@
                     if(link == v){
                         this[v] = true
                         document.getElementById(v).className = 'nav-item active';
+                    }
+                    else if (link == 'logout') {
+                        this.$router.push('/')
                     } else {
                         this[v] = false
                         document.getElementById(v).className = 'nav-item';
                     }
                 })
+            },
+            sidebar: function () {
+                // Added jquery for toggle: --->
+                $('#body').toggleClass('sidebar-toggled');
+                $('.sidebar').toggleClass('toggled');
             }
         }
     }

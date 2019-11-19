@@ -47,9 +47,14 @@
                 console.log(`p : ${p}`);
                 this.password = '';
 
-                // put message inside of a .catch for request. It will display : id=errorMessage
-                this.seen = true;
-                setTimeout(() => { this.seen = false }, 2000)
+
+                if (u.toLowerCase() == 'admin' && p == 'password') {
+                  this.$router.push('dashview')
+                } else {
+                    // put message inside of a .catch for request. It will display : id=errorMessage
+                    this.seen = true;
+                    setTimeout(() => { this.seen = false }, 2000)
+                }
             },
         },
     }

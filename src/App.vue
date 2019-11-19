@@ -15,9 +15,12 @@ export default {
 
   components: {
   },
-    data() {
-        return {
-        }
-    },
+  data() {
+      return {
+      }
+  },
+  beforeMount() {
+      this.$store.dispatch('actionMockData')
+  }
 };
 </script>
