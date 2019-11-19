@@ -1,4 +1,9 @@
 # bootstrap-sb-admin-2-vue
+https://startbootstrap.com/themes/sb-admin-2/
+
+# Free Template from Bootstrap
+This is edited to work with Vuejs Vuex and Vuetify
+Changed some of the features that are on the original tempalte
 
 ## Project setup
 ```
