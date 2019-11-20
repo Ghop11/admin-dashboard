@@ -12,13 +12,13 @@
         <v-card-text class="px-3">
           <v-text-field label="Client Account Number" v-model="clientNumber"></v-text-field>
         </v-card-text>
-        <v-menu class="px-3" ref="menu"  :close-on-content-click="false" :return-value.sync="date" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+        <v-menu class="px-3" ref="menu" @click="$refs.menu.save(date)" :close-on-content-click="false"  :return-value.sync="date" transition="scale-transition" offset-y max-width="290px" min-width="290px">
           <template v-slot:activator="{ on }">
             <v-text-field class="px-3" v-model="date" label="Date" readonly v-on="on"></v-text-field>
           </template>
           <v-date-picker v-model="date" no-title scrollable>
             <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+<!--            <v-btn text color="primary" @click="menu = false">Cancel</v-btn>-->
             <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
@@ -49,6 +49,7 @@
         data() {
             return {
                 clientNumber: '',
+                orderNumber: '',
                 date: '',
                 report: '',
                 order: '',
@@ -90,6 +91,7 @@
 
                 let data = {
                     "clientNumber": this.clientNumber,
+                    'orderNumber': Math.floor((Math.random() * 10000000) + 10000).toString(),
                     "date" : this.date,
                     'orderQty': this.order,
                     'costPerUnit': this.cost,
