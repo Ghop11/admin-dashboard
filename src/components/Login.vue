@@ -5,7 +5,7 @@
         <v-card-title class="justify-center">Login</v-card-title>
         <v-card-text id="errorMessage" class="text-center red--text" v-if="seen" >Incorrect username and/or password</v-card-text>
         <v-card-text>
-          <v-text-field v-model="username" label="Username" outlined shaped></v-text-field>
+          <v-text-field  v-model="username" label="Username" outlined shaped></v-text-field>
           <v-text-field
                   v-model="password"
                   outlined shaped label="Password"
@@ -57,3 +57,6 @@
         },
     }
 </script>
+
+<style scoped>
+</style>
