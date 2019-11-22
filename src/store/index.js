@@ -1,16 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import report from './reportData.js'
+import userData from "./userData";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    reports: []
+    reports: [],
+    user: {},
+    Session: false,
   },
   mutations: {
     INIT_REPORTS(state, data){
       state.reports = data;
+    },
+    LOGIN(state, data){
+      state.user = data;
+      state.Session = true;
     },
     UPDATE_REPORTS(state, data){
       state.reports.push(data)
@@ -40,6 +47,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    login({commit}, event){
+      let data = userData.mockData;
+      commit('LOGIN', data)
+    },
     actionMockData({commit}, event){
       let data = report.mockData;
       commit('INIT_REPORTS', data);
@@ -58,7 +69,13 @@ export default new Vuex.Store({
   getters: {
     getReports: state => {
       return state.reports;
-    }
+    },
+    getUserInfo: state => {
+      return state.user;
+    },
+    getSession: state => {
+      return state.Session;
+    },
   },
   modules: {
   }

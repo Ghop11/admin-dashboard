@@ -10,7 +10,7 @@
         <v-row>
           <v-spacer></v-spacer>
           <v-col cols="8">
-            <v-icon class="float-right px-3" v-on:click="edit()">mdi-pencil</v-icon>
+            <v-icon class="float-right px-3" v-on:click="exitSetting()">mdi-pencil</v-icon>
           </v-col>
         </v-row>
 
@@ -21,7 +21,7 @@
             <v-subheader>Name:</v-subheader>
           </v-col>
           <v-col cols="8">
-            <v-text-field id="name" v-model="name" :disabled="isDisabled"></v-text-field>
+            <v-text-field id="name" v-model="userData.name" :disabled="isDisabled"></v-text-field>
           </v-col>
         </v-row>
 
@@ -32,7 +32,7 @@
             <v-subheader>Username:</v-subheader>
           </v-col>
           <v-col cols="8">
-            <v-text-field id="username" v-model="username" :disabled="isDisabled"></v-text-field>
+            <v-text-field id="username" v-model="userData.username" :disabled="isDisabled"></v-text-field>
           </v-col>
         </v-row>
 
@@ -42,7 +42,7 @@
             <v-subheader>Email:</v-subheader>
           </v-col>
           <v-col cols="8">
-            <v-text-field id="email" v-model="email" :disabled="isDisabled"></v-text-field>
+            <v-text-field id="email" v-model="userData.email" :disabled="isDisabled"></v-text-field>
           </v-col>
         </v-row>
 
@@ -75,7 +75,7 @@
             </v-subheader>
           </v-col>
           <v-col cols="4">
-           <v-btn  v-on:click="edit" :hidden="isHidden">Cancel</v-btn>
+           <v-btn  v-on:click="exitSetting" :hidden="isHidden">Cancel</v-btn>
           </v-col>
         </v-row>
       </v-card>
@@ -93,19 +93,16 @@
         name: "Settings.vue",
         data() {
             return {
-
-                username: 'admin',
-                email: 'email@email.com',
                 password: '',
                 confirmPassword: '',
-                name: 'First Name',
                 isDisabled: true,
                 isHidden: true,
-
+                userData: Object.assign({}, this.$store.getters.getUserInfo),
+                defaultUserData: Object.assign({}, this.$store.getters.getUserInfo),
             }
         },
         methods: {
-            edit: function () {
+            mode: function () {
               // enable all fields:
                 if(this.isDisabled){
                     this.isDisabled = false;
@@ -116,7 +113,16 @@
                 }
             },
             saveSettings: function () {
+                // TODO: need toupdate store with new data
                 console.log(`Saving new account details`);
+                // update profile
+
+                this.mode();
+            },
+            exitSetting: function () {
+                // TODO: need toreset values
+                this.userData = this.defaultUserData;
+                this.mode();
             }
         },
     }

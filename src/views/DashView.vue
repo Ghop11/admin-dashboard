@@ -1,6 +1,7 @@
 <template>
+  <div>
   <!-- Page Wrapper -->
-  <div id="wrapper">
+  <div id="wrapper" v-if="Session" >
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -113,8 +114,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userData.name}}</span>
+                <img class="img-profile rounded-circle" :src="userData.photoIcon">
               </a>
               <!-- Dropdown - User Information -->
               <!-- Dropdown - TODO add some drop down for user details and logout -->
@@ -156,6 +157,11 @@
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
+
+    <div id="noSession" v-else>
+      <NoSession></NoSession>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -164,16 +170,21 @@
     import AddReports from "../components/AddReports.vue";
     import UpdateReports from '../components/UpdateReports.vue';
     import Settings from "../components/Settings";
+    import NoSession from "../components/NoSession";
     import $ from 'jquery';
+    import {mapState, mapGetters, mapActions} from 'vuex'
+
 
     export default {
         name: "DashView.vue",
         components: {
+            NoSession,
             Charts,
             Dashboard,
             AddReports,
             UpdateReports,
             Settings,
+            NoSession,
         },
         data() {
             return {
@@ -184,7 +195,15 @@
                 settings: false,
                 logout: false,
                 updateReports: false,
+                userData: this.$store.getters.getUserInfo,
+                Session: this.$store.getters.getSession,
             }
+        },
+        computed: {
+            ...mapGetters(['getReports']),
+            ...mapState(['reports']),
+            ...mapActions(['deleteReport', 'updateExistingReport']),
+
         },
         methods: {
             view: function (link) {

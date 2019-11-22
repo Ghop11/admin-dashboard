@@ -43,13 +43,11 @@
                 // make api request to check creds:
                 let u = this.username;
                 let p = this.password;
-                console.log(`u : ${u}`);
-                console.log(`p : ${p}`);
                 this.password = '';
 
-
                 if (u.toLowerCase() == 'admin' && p == 'password') {
-                  this.$router.push('dashview')
+                    this.$store.dispatch('login');
+                    this.$router.push('dashview')
                 } else {
                     // put message inside of a .catch for request. It will display : id=errorMessage
                     this.seen = true;
