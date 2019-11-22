@@ -93,8 +93,8 @@
                     "clientNumber": this.clientNumber,
                     'orderNumber': Math.floor((Math.random() * 10000000) + 10000).toString(),
                     "date" : this.date,
-                    'orderQty': this.order,
-                    'costPerUnit': this.cost,
+                    'orderQty': parseInt(this.order),
+                    'costPerUnit': parseFloat(this.cost),
                     "report": this.report
                 };
 

@@ -110,7 +110,7 @@
                 reports.forEach((report ) => {
                     let amount = report.orderQty * report.costPerUnit;
                     earnings += amount;
-                    orders += report.orderQty;
+                    orders += parseInt(report.orderQty);
                 });
 
                 // goal is 1000 from TotalGoalChar.vue
@@ -118,7 +118,7 @@
 
                 this.monthlyOrders = orders;
                 this.monthlyEarnings = "$" + earnings.toFixed(2);
-                this.monthlyGoalTracker = (tracker * 100) + "%";
+                this.monthlyGoalTracker = (tracker * 100).toFixed(2) + "%";
 
             }
         },
